@@ -28,7 +28,8 @@ const TopHeader = ({ numOfItems }) => {
       {/* Brand */}
       <div className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0'>
         <Image
-          src={'/logo.png'}
+          src='/logo.png'
+          alt='Techiebay Logo'
           width={100}
           height={45}
           objectFit='contain'

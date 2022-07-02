@@ -9,7 +9,7 @@ const BottomHeader = () => {
       </p>
       <p className='linkAlt'>Essentials</p>
       <p className='linkAlt'>Bestsellers</p>
-      <p className='linkAlt'>Today's Deals</p>
+      <p className='linkAlt'>Today&#39;s Deals</p>
       <p className='linkAlt hidden lg:inline-flex'>Fashion</p>
       <p className='linkAlt hidden lg:inline-flex'>Electronics</p>
       <p className='linkAlt hidden lg:inline-flex'>Prime</p>
