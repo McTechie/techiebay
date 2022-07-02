@@ -7,7 +7,6 @@ const Header = () => {
   return (
     <header>
       <TopHeader numOfItems={items.length} />
-
       <BottomHeader />
     </header>
   );
