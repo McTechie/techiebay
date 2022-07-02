@@ -15,13 +15,13 @@ const Banner = () => {
         interval={5000}
       >
         <div>
-          <Image loading='lazy' src='/banner1.webp' alt='Home Shopping Spree' width={1536} height={630} />
+          <Image priority src='/banner1.webp' alt='Home Shopping Spree' width={1536} height={630} />
         </div>
         <div>
-          <Image loading='lazy' src='/banner2.webp' alt='Buy Mobile Accessories' width={1536} height={630} />
+          <Image src='/banner2.webp' alt='Buy Mobile Accessories' width={1536} height={630} />
         </div>
         <div>
-          <Image loading='lazy' src='/banner3.webp' alt='Content Creator Accessories' width={1536} height={630} />
+          <Image src='/banner3.webp' alt='Content Creator Accessories' width={1536} height={630} />
         </div>
       </Carousel>
     </div>

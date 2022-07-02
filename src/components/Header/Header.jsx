@@ -1,5 +1,5 @@
-import TopHeader from './TopHeader'
-import BottomHeader from './BottomHeader'
+import TopHeader from '../TopHeader/TopHeader'
+import BottomHeader from '../BottomHeader/BottomHeader'
 
 const Header = () => {
   const items = [];
