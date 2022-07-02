@@ -6,4 +6,8 @@
   .link {
     @apply cursor-pointer border-[1px] border-techiebay_blue hover:border-white py-1 px-2 rounded-sm;
   }
+
+  .linkAlt {
+    @apply cursor-pointer border-[1px] border-techiebay_blue-light hover:border-white py-[0.2rem] px-2 rounded-sm;
+  }
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
-import { SearchIcon, MenuIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon, ChevronDownIcon } from '@heroicons/react/outline'
+import { SearchIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon, ChevronDownIcon } from '@heroicons/react/outline'
 
 const TopHeader = ({ numOfItems }) => {
   const [showLanguages, setShowLanguages] = useState(false);
