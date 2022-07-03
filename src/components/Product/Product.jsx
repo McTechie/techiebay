@@ -15,7 +15,7 @@ const Product = ({ title, price, description, category, image, rating }) => {
   }, []);
 
   return (
-    <div className='relative flex flex-col m-5 bg-white z-30 p-10'>
+    <div className='relative flex flex-col m-5 bg-white z-30 p-10 hover:-translate-y-2 hover:duration-300'>
       <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
       <Image src={image} alt={title} width={200} height={200} objectFit='contain' />

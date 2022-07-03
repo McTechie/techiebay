@@ -1,7 +1,19 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { Banner, Header, ProductFeed } from '../components'
+import { Banner, Footer, Header, ProductFeed } from '../components'
 
 export default function Home({ products }) {
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleSearchOverlay = () => {
+    setIsSearching(isSearching => !isSearching);
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => setIsSearching(false));
+    return () => window.removeEventListener('scroll', () => {});
+  });
+
   return (
     <div className='bg-gray-100'>
       <Head>
@@ -10,12 +22,16 @@ export default function Home({ products }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Header />
+      <Header handleSearchOverlay={handleSearchOverlay} />
+
+      {isSearching && <div onClick={handleSearchOverlay} className='h-screen w-full bg-black opacity-60 z-50 absolute' />}
 
       <main className='max-w-screen-2xl mx-auto'>
         <Banner />
         <ProductFeed products={products} />
       </main>
+
+      <Footer />
     </div>
   )
 }

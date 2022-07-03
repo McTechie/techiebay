@@ -1,5 +1,6 @@
-import Header from './Header/Header'
 import Banner from './Banner/Banner'
+import Footer from './Footer/Footer'
+import Header from './Header/Header'
 import ProductFeed from './ProductFeed/ProductFeed'
 
-export { Header, Banner, ProductFeed };
+export { Banner, Footer, Header, ProductFeed };

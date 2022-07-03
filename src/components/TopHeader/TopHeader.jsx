@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import Image from 'next/image'
-import { SearchIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon, ChevronDownIcon } from '@heroicons/react/outline'
+import { SearchIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon } from '@heroicons/react/solid'
 
-const TopHeader = ({ numOfItems }) => {
+const TopHeader = ({ numOfItems, handleSearchOverlay }) => {
   const [showLanguages, setShowLanguages] = useState(false);
   const [currentLang, setCurrentLang] = useState('English');
   const [languages, setLanguages] = useState([
     { id: 1, name: 'English' },
     { id: 2, name: 'Hindi' },
     { id: 3, name: 'Japanese' }
-  ])
+  ]);
 
   const handleShowLanguages = () => {
     setShowLanguages(prevState => !prevState);
@@ -22,7 +23,6 @@ const TopHeader = ({ numOfItems }) => {
 
   return (
     <div className='flex items-center bg-techiebay_blue flex-grow px-1 py-2'>
-      
       {/* Left Part */}
       
       {/* Brand */}
@@ -47,9 +47,16 @@ const TopHeader = ({ numOfItems }) => {
       </div>
 
       {/* Search Bar */}
-      <div className='hidden sm:flex sm:ml-3 items-center h-10 rounded-md flex-grow cursor-pointer bg-orange-400  hover:bg-orange-500'>
-        <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type='text' />
-        <SearchIcon className='h-12 p-3' />
+      <div className='hidden sm:flex sm:ml-3 items-center h-10 rounded-md flex-grow cursor-pointer'>
+        <button className='p-2 py-2 rounded-l-md bg-gray-100 text-gray-600 hover:bg-gray-300'>
+          <span className='flex items-end'>All <ChevronDownIcon className='pl-2 h-5' /></span>
+        </button>
+        <input
+          className='p-2 h-full w-6 flex-grow flex-shrink focus:outline-orange-500 px-4'
+          type='text'
+          onFocus={handleSearchOverlay}
+        />
+        <SearchIcon className='h-10 p-3 bg-orange-400 hover:bg-orange-500 rounded-r-md' />
       </div>
 
       {/* Right Part */}
@@ -84,7 +91,9 @@ const TopHeader = ({ numOfItems }) => {
                       className='cursor-pointer'
                       onChange={() => handleChangeLanguage(language.name)}
                     />
-                    <label className='pl-3 cursor-pointer' htmlFor={language.name}>{language.name}</label>
+                    <label className='pl-3 cursor-pointer' htmlFor={language.name}>
+                      {language.name}
+                    </label>
                   </li>
                 ))}
               </ul>

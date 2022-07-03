@@ -1,12 +1,12 @@
 import TopHeader from '../TopHeader/TopHeader'
 import BottomHeader from '../BottomHeader/BottomHeader'
 
-const Header = () => {
+const Header = ({ handleSearchOverlay }) => {
   const items = [];
 
   return (
     <header>
-      <TopHeader numOfItems={items.length} />
+      <TopHeader numOfItems={items.length} handleSearchOverlay={handleSearchOverlay} />
       <BottomHeader />
     </header>
   );
