@@ -1,9 +1,17 @@
 import { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { SearchIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useSelector } from 'react-redux'
+import { selectItems } from '../redux/slices/cartSlice'
 
-const TopHeader = ({ numOfItems, handleSearchOverlay }) => {
+const TopHeader = ({ handleSearchOverlay }) => {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const items = useSelector(selectItems);
+
   const [showLanguages, setShowLanguages] = useState(false);
   const [currentLang, setCurrentLang] = useState('English');
   const [languages, setLanguages] = useState([
@@ -26,7 +34,7 @@ const TopHeader = ({ numOfItems, handleSearchOverlay }) => {
       {/* Left Part */}
       
       {/* Brand */}
-      <div className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0'>
+      <div className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0' onClick={() => router.push('/')}>
         <Image
           src='/logo.png'
           alt='Techiebay Logo'
@@ -102,8 +110,8 @@ const TopHeader = ({ numOfItems, handleSearchOverlay }) => {
         )}
 
         {/* Login Info */}
-        <div className='link'>
-          <p>Hello, Mcvean Soans</p>
+        <div onClick={session ? signOut : signIn} className='link'>
+          <p>Hello, {session ? session.user.name : 'Sign In'}</p>
           <p className='text-white font-bold'>Account &amp; Lists</p>
         </div>
 
@@ -114,11 +122,11 @@ const TopHeader = ({ numOfItems, handleSearchOverlay }) => {
         </div>
 
         {/* Shopping Cart */}
-        <div className='text-white flex flex-row items-end link'>
+        <div className='text-white flex flex-row items-end link' onClick={() => router.push('/checkout')}>
           <ShoppingCartIcon className='h-8' />
           <div>
             <p className='text-xs font-extrabold text-orange-400 rounded-full w-4 text-center'>
-              {numOfItems}
+              {items.length}
             </p>
             <p className='font-bold'>Cart</p>
           </div>

@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { StarIcon } from '@heroicons/react/solid'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../redux/slices/cartSlice'
 
-const Product = ({ title, price, description, category, image, rating }) => {
+const Product = ({ id, title, price, description, category, image, rating }) => {
+  const dispatch = useDispatch();
+
   const [stars, setStars] = useState(0);
   const [hasPrimeDelivery, setHasPrimeDelivery] = useState(false);
 
@@ -13,6 +17,12 @@ const Product = ({ title, price, description, category, image, rating }) => {
   
     return () => {}
   }, []);
+
+  const handleAddItemToCart = () => {
+    const item = { id, title, price, description, category, image, stars, hasPrimeDelivery };
+
+    dispatch(addToCart(item));
+  }
 
   return (
     <div className='relative flex flex-col m-5 bg-white z-30 p-10 hover:-translate-y-2 hover:duration-300'>
@@ -39,13 +49,13 @@ const Product = ({ title, price, description, category, image, rating }) => {
       </div>
 
       {hasPrimeDelivery && (
-        <div className='flex items-center space-x-2 -mt-5'>
+        <div className='flex items-center space-x-2 -mt-5 mb-2'>
           <Image src='/prime.png' alt='Techiebay Prime Delivery' width={50} height={50} />
           <p className='text-xs text-gray-500'>FREE Next-Day Delivery</p>
         </div>
       )}
 
-      <button className='mt-auto btn'>Add to Cart</button>
+      <button onClick={handleAddItemToCart} className='mt-auto btn'>Add to Cart</button>
     </div>
   );
 }

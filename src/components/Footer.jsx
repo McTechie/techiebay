@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import BrandFooter from '../BrandFooter/BrandFooter'
+import BrandFooter from './BrandFooter'
 
 const Footer = () => {
   const [footerItems] = useState([

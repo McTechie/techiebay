@@ -1,12 +1,15 @@
 import { Provider } from 'react-redux'
+import { SessionProvider } from 'next-auth/react'
 import { store } from '../redux/app/store'
 import '../styles/globals.css'
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <SessionProvider session={pageProps.session}>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </SessionProvider>
   )
 }
 

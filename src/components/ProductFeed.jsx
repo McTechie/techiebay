@@ -1,9 +1,10 @@
-import Product from '../Product/Product'
+import Product from './Product'
 
 const ProductMap = ({ products }) => (
   products.map(({ id, title, price, description, category, image, rating }) => (
     <Product
       key={id}
+      id={id}
       title={title}
       price={price}
       description={description}
