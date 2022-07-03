@@ -17,7 +17,7 @@ const ProductMap = ({ products }) => (
 const ProductFeed = ({ products }) => {
   return (
     <div className='grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto'>
-      {<ProductMap products={products.slice(0, 4)} />}
+      {<ProductMap products={products?.slice(0, 4)} />}
 
       <picture className='md:col-span-full'>
         <source srcSet='/row_banner.webp' type='image/webp' />
@@ -25,10 +25,10 @@ const ProductFeed = ({ products }) => {
       </picture>
 
       <div className='md:col-span-2'>
-        {<ProductMap products={products.slice(4, 5)} />}
+        {<ProductMap products={products?.slice(4, 5)} />}
       </div>
 
-      {<ProductMap products={products.slice(5, products.length)} />}
+      {<ProductMap products={products?.slice(5, products.length)} />}
     </div>
   );
 }

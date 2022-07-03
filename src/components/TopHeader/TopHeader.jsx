@@ -99,7 +99,7 @@ const TopHeader = ({ numOfItems }) => {
         </div>
 
         {/* Previous Orders */}
-        <div className='link'>
+        <div className='link hidden md:inline-block'>
           <p>Returns</p>
           <p className='text-white font-bold'>&amp; Orders</p>
         </div>

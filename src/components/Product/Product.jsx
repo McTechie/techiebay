@@ -1,10 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { StarIcon } from '@heroicons/react/solid'
 
-const Product = ({ id, title, price, description, category, image, rating }) => {
-  const stars = Math.floor(rating);
-  const hasPrimeDelivery = Math.random() < 0.5;
+const Product = ({ title, price, description, category, image, rating }) => {
+  const [stars, setStars] = useState(0);
+  const [hasPrimeDelivery, setHasPrimeDelivery] = useState(false);
+
+  // Prevents react-hydration-error -> initially rendered DOM is different from pre-rendered DOM
+  useEffect(() => {
+    setStars(Math.floor(rating));
+    setHasPrimeDelivery(Math.random() < 0.5);
+  
+    return () => {}
+  }, []);
 
   return (
     <div className='relative flex flex-col m-5 bg-white z-30 p-10'>
