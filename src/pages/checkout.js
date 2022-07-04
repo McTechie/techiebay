@@ -7,11 +7,22 @@ import { Header, Footer, CartItems, CheckoutSidebar } from '../components'
 const Checkout = () => {
   const items = useSelector(selectItems);
   
+  const [totalItems, setTotalItems] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
 
   const handleSearchOverlay = () => {
     setIsSearching(isSearching => !isSearching);
-  }
+  };
+
+  useEffect(() => {
+    let total = 0;
+
+    items.length > 0 && items.forEach(item => {
+      total += item.count;
+    });
+
+    setTotalItems(total);
+  }, [items]);
 
   useEffect(() => {
     window.addEventListener('scroll', () => setIsSearching(false));
@@ -34,7 +45,7 @@ const Checkout = () => {
         
         <CartItems items={items} />
 
-        <CheckoutSidebar items={items} />
+        <CheckoutSidebar totalItems={totalItems} />
 
       </main>
 

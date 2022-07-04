@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { SearchIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -11,6 +12,8 @@ const TopHeader = ({ handleSearchOverlay }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
+
+  const [totalItems, setTotalItems] = useState(0);
 
   const [showLanguages, setShowLanguages] = useState(false);
   const [currentLang, setCurrentLang] = useState('English');
@@ -29,12 +32,22 @@ const TopHeader = ({ handleSearchOverlay }) => {
     console.log(name);
   }
 
+  useEffect(() => {
+    let total = 0;
+
+    items.length > 0 && items.forEach(item => {
+      total += item.count;
+    });
+
+    setTotalItems(total);
+  }, [items]);
+
   return (
     <div className='flex items-center bg-techiebay_blue flex-grow px-1 py-2'>
       {/* Left Part */}
       
       {/* Brand */}
-      <div className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0' onClick={() => router.push('/')}>
+      <Link href='/' className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0'>
         <Image
           src='/logo.png'
           alt='Techiebay Logo'
@@ -43,7 +56,7 @@ const TopHeader = ({ handleSearchOverlay }) => {
           objectFit='contain'
           className='cursor-pointer'
         />
-      </div>
+      </Link>
 
       {/* Location Picker */}
       <div className='hidden lg:flex content-end text-white mx-4 link'>
@@ -126,7 +139,7 @@ const TopHeader = ({ handleSearchOverlay }) => {
           <ShoppingCartIcon className='h-8' />
           <div>
             <p className='text-xs font-extrabold text-orange-400 rounded-full w-4 text-center'>
-              {items.length}
+              {totalItems}
             </p>
             <p className='font-bold'>Cart</p>
           </div>

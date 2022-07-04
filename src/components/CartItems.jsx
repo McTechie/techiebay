@@ -17,7 +17,7 @@ const CartItems = ({ items }) => {
           Shopping Cart {!items.length && 'is empty...'}
         </h1>
 
-        {items.map(({ id, title, price, description, category, image, stars, hasPrimeDelivery }, idx) => (
+        {items.map(({ id, title, price, description, category, image, stars, hasPrimeDelivery, count }, idx) => (
           <CartItem
             key={idx}
             id={id}
@@ -28,6 +28,7 @@ const CartItems = ({ items }) => {
             image={image}
             stars={stars}
             hasPrimeDelivery={hasPrimeDelivery}
+            count={count}
           />
         ))}
       </div>

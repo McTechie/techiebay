@@ -19,7 +19,8 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
   }, []);
 
   const handleAddItemToCart = () => {
-    const item = { id, title, price, description, category, image, stars, hasPrimeDelivery };
+    const count = 1;
+    const item = { id, title, price: price * 10, description, category, image, stars, hasPrimeDelivery, count };
 
     dispatch(addToCart(item));
   }

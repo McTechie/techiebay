@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import { addToCart, removeFromCart } from '../redux/slices/cartSlice'
 
-const CartItem = ({ id, title, price, description, category, image, stars, hasPrimeDelivery }) => {
+const CartItem = ({ id, title, price, description, category, image, stars, hasPrimeDelivery, count }) => {
   const dispatch = useDispatch();
 
   const handleAddItemToCart = () => {
@@ -31,6 +31,10 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
           {title}
         </p>
 
+        <p className='text-sm my-2 italic'>
+          Count: {count}
+        </p>
+
         <div className='flex'>
           {Array(stars)
             .fill()
@@ -44,7 +48,7 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
         </p>
 
         <div className='mb-5'>
-          &#8377;{price * 10}
+          &#8377;{price}
         </div>
 
         {hasPrimeDelivery && (
