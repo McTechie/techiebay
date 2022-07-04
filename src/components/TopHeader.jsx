@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { SearchIcon, ShoppingCartIcon, LocationMarkerIcon, TranslateIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -47,7 +46,7 @@ const TopHeader = ({ handleSearchOverlay }) => {
       {/* Left Part */}
       
       {/* Brand */}
-      <Link href='/' className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0'>
+      <div onClick={() => router.push('/')} className='ml-4 mt-2 flex items-center flex-grow sm:flex-grow-0'>
         <Image
           src='/logo.png'
           alt='Techiebay Logo'
@@ -56,7 +55,7 @@ const TopHeader = ({ handleSearchOverlay }) => {
           objectFit='contain'
           className='cursor-pointer'
         />
-      </Link>
+      </div>
 
       {/* Location Picker */}
       <div className='hidden lg:flex content-end text-white mx-4 link'>

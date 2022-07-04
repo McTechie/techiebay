@@ -1,7 +1,7 @@
-import { StarIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
+import { StarIcon, TrashIcon } from '@heroicons/react/solid'
 import { useDispatch } from 'react-redux'
-import { addToCart, removeFromCart } from '../redux/slices/cartSlice'
+import { addToCart, removeFromCart, removeAllFromCart } from '../redux/slices/cartSlice'
 
 const CartItem = ({ id, title, price, description, category, image, stars, hasPrimeDelivery, count }) => {
   const dispatch = useDispatch();
@@ -12,12 +12,20 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
     dispatch(addToCart(item));
   }
 
-  const handleAddRemoveFromCart = () => {
+  const handleRemoveItemFromCart = () => {
     dispatch(removeFromCart({ id }));
+  }
+
+  const handleRemoveAllItemsFromCart = () => {
+    const userDecision = confirm('You are trying to delete ' + title + ' (Quantity: ' + count + ') from the Cart');
+
+    if (userDecision) {
+      dispatch(removeAllFromCart({ id }));
+    }
   }
   
   return (
-    <div className='grid grid-cols-5'>
+    <div className='grid grid-cols-5 shadow-md p-3'>
       <Image
         src={image}
         alt={title}
@@ -26,13 +34,9 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
         objectFit='contain'
       />
 
-      <div className='col-span-3 mx-5'>
+      <div className='col-span-4 mx-5'>
         <p className='text-lg font-bold'>
           {title}
-        </p>
-
-        <p className='text-sm my-2 italic'>
-          Count: {count}
         </p>
 
         <div className='flex'>
@@ -57,11 +61,15 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
             <p className='text-xs text-gray-500'>FREE Next-Day Delivery</p>
           </div>
         )}
-      </div>
 
-      <div className='flex flex-col space-y-2 my-auto justify-self-end'>
-        <button className='btn' onClick={handleAddItemToCart}>Add to Cart</button>
-        <button className='btn' onClick={handleAddRemoveFromCart}>Remove Cart</button>
+        <div className='flex items-center'>
+          <button className='btnAlt' onClick={handleRemoveItemFromCart}>-</button>
+          <span className='mx-3'>{count}</span>
+          <button className='btnAlt' onClick={handleAddItemToCart}>+</button>
+          <button className='btnDelete ml-3' onClick={handleRemoveAllItemsFromCart}>
+            <TrashIcon className='h-5' />
+          </button>
+        </div>
       </div>
     </div>
   );

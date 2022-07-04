@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { StarIcon } from '@heroicons/react/solid'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../redux/slices/cartSlice'
+import { addToCart, removeFromCart, removeAllFromCart } from '../redux/slices/cartSlice'
 
 const Product = ({ id, title, price, description, category, image, rating }) => {
   const dispatch = useDispatch();
@@ -14,8 +14,6 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
   useEffect(() => {
     setStars(Math.floor(rating));
     setHasPrimeDelivery(Math.random() < 0.5);
-  
-    return () => {}
   }, []);
 
   const handleAddItemToCart = () => {
@@ -29,7 +27,14 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
     <div className='relative flex flex-col m-5 bg-white z-30 p-10 hover:-translate-y-2 hover:duration-300'>
       <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
-      <Image src={image} alt={title} width={200} height={200} objectFit='contain' />
+      <Image
+        src={image}
+        alt={title}
+        width={200}
+        height={200}
+        objectFit='contain'
+        placeholder='empty'
+      />
       
       <h4 className='my-3'>{title}</h4>
 

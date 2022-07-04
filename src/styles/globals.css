@@ -14,4 +14,12 @@
   .btn {
     @apply p-2 text-xs md:text-sm bg-gradient-to-b from-orange-200 to-orange-400 border border-orange-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500 active:from-orange-500 active:to-orange-400;
   }
+
+  .btnAlt {
+    @apply py-1 px-3 text-xs md:text-sm bg-gradient-to-b from-gray-200 to-gray-400 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-gray-500 active:from-gray-500 active:to-gray-400;
+  }
+
+  .btnDelete {
+    @apply py-1 px-2 text-xs md:text-sm bg-gradient-to-b from-red-200 to-red-400 border border-red-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-red-500 active:from-red-500 active:to-red-400;
+  }
 }

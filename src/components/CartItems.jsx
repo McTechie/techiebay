@@ -14,7 +14,7 @@ const CartItems = ({ items }) => {
 
       <div className='flex flex-col p-5 space-y-10 bg-white'>
         <h1 className='text-3xl border-b pb-4'>
-          Shopping Cart {!items.length && 'is empty...'}
+          Your Cart {!items.length && 'is empty...'}
         </h1>
 
         {items.map(({ id, title, price, description, category, image, stars, hasPrimeDelivery, count }, idx) => (

@@ -36,10 +36,21 @@ export const cartSlice = createSlice({
 
       state.items = newCart;
     },
+    removeAllFromCart: (state, action) => {
+      const index = state.items.findIndex(item => item.id === action.payload.id);
+
+      let newCart = [...state.items];
+
+      if (index >= 0) {
+        newCart.splice(index, 1);
+      }
+
+      state.items = newCart;
+    }
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, removeAllFromCart } = cartSlice.actions;
 
 export const selectItems = (state) => state.cart.items;
 export const selectTotal = (state) => state.cart.items.reduce((total, item) => total + item.price, 0);
