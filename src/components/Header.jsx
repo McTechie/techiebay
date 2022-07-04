@@ -3,7 +3,7 @@ import BottomHeader from './BottomHeader'
 
 const Header = ({ handleSearchOverlay }) => {
   return (
-    <header>
+    <header className='sticky top-0 z-50'>
       <TopHeader handleSearchOverlay={handleSearchOverlay} />
       <BottomHeader />
     </header>

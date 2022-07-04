@@ -25,7 +25,7 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
   }
   
   return (
-    <div className='grid grid-cols-5 shadow-md p-3'>
+    <div className='grid grid-cols-5 shadow-md rounded-lg p-5'>
       <Image
         src={image}
         alt={title}
@@ -62,7 +62,7 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
           </div>
         )}
 
-        <div className='flex items-center'>
+        <div className='flex items-center mt-2'>
           <button className='btnAlt' onClick={handleRemoveItemFromCart}>-</button>
           <span className='mx-3'>{count}</span>
           <button className='btnAlt' onClick={handleAddItemToCart}>+</button>

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { StarIcon } from '@heroicons/react/solid'
-import { useDispatch } from 'react-redux'
-import { addToCart, removeFromCart, removeAllFromCart } from '../redux/slices/cartSlice'
+import { BadgeCheckIcon, StarIcon } from '@heroicons/react/solid'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCart, selectItems } from '../redux/slices/cartSlice'
 
 const Product = ({ id, title, price, description, category, image, rating }) => {
   const dispatch = useDispatch();
+  const items = useSelector(selectItems);
 
   const [stars, setStars] = useState(0);
   const [hasPrimeDelivery, setHasPrimeDelivery] = useState(false);
@@ -61,7 +62,20 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
         </div>
       )}
 
-      <button onClick={handleAddItemToCart} className='mt-auto btn'>Add to Cart</button>
+      <button
+        disabled={items.findIndex(item => item.id === id) >= 0}
+        onClick={handleAddItemToCart}
+        className='mt-auto btn disabled:from-orange-500 disabled:to-orange-400'
+      >
+        {items.findIndex(item => item.id === id) >= 0 ? (
+            <div className='flex items-center justify-center'>
+              <BadgeCheckIcon className='h-5 mr-2' />
+              Added to Cart
+            </div>
+          ) : (
+          'Add to Cart'
+        )}
+      </button>
     </div>
   );
 }
