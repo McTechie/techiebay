@@ -18,7 +18,7 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
 
   const handleAddItemToCart = () => {
     const count = 1;
-    const item = { id, title, price: price * 10, description, category, image, stars, hasPrimeDelivery, count };
+    const item = { id, title, price: Math.round(price * 10), description, category, image, stars, hasPrimeDelivery, count };
 
     dispatch(addToCart(item));
   }
@@ -51,7 +51,7 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
       </p>
 
       <div className='mb-5'>
-        &#8377;{price * 10}
+        &#8377;{Math.round(price * 10)} <span className='text-red-400 ml-1 text-sm line-through'>{Math.round(price * 10 * 1.5)}</span>
       </div>
 
       {hasPrimeDelivery && (

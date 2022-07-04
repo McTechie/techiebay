@@ -1,18 +1,27 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Banner, Footer, Header, ProductFeed } from '../components'
+import { useDispatch } from 'react-redux'
+import { fetchCartFromStorage } from '../redux/slices/cartSlice'
 
 export default function Home({ products }) {
   const [isSearching, setIsSearching] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleSearchOverlay = () => {
     setIsSearching(isSearching => !isSearching);
   }
 
   useEffect(() => {
+    const storageItems = localStorage.getItem('techiebay cart') || [];
+    dispatch(fetchCartFromStorage(JSON.parse(storageItems)));
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('scroll', () => setIsSearching(false));
     return () => window.removeEventListener('scroll', () => {});
-  });
+  }, [isSearching]);
 
   return (
     <div className='bg-gray-100'>

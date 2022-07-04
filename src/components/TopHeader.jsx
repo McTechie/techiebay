@@ -14,6 +14,8 @@ const TopHeader = ({ handleSearchOverlay }) => {
 
   const [totalItems, setTotalItems] = useState(0);
 
+  const [showSignIn, setShowSignIn] = useState(false);
+  
   const [showLanguages, setShowLanguages] = useState(false);
   const [currentLang, setCurrentLang] = useState('English');
   const [languages, setLanguages] = useState([
@@ -29,6 +31,10 @@ const TopHeader = ({ handleSearchOverlay }) => {
   const handleChangeLanguage = (name) => {
     setCurrentLang(name);
     console.log(name);
+  }
+
+  const handleShowSignIn = () => {
+    setShowSignIn(prevState => !prevState);
   }
 
   useEffect(() => {
@@ -92,9 +98,9 @@ const TopHeader = ({ handleSearchOverlay }) => {
           <div
             onMouseEnter={handleShowLanguages}
             onMouseLeave={handleShowLanguages}
-            className='bg-zinc-200 text-techiebay_blue absolute right-80 top-12 rounded-sm'
+            className='bg-zinc-200 text-techiebay_blue absolute right-80 top-12 rounded-sm z-20'
           >
-            <div className='relative left-[4.25rem] -top-2 border-zinc-200 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent'></div>
+            <div className='relative left-24 -top-2 border-zinc-200 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent'></div>
             <form className='text-sm w-36'>
               <ul className='px-4 pb-3 pt-2 space-y-3'>
                 {languages.map(language => (
@@ -122,10 +128,30 @@ const TopHeader = ({ handleSearchOverlay }) => {
         )}
 
         {/* Login Info */}
-        <div onClick={session ? signOut : signIn} className='link'>
-          <p>Hello, {session ? session.user.name : 'Sign In'}</p>
+        <div
+          onClick={!session ? signIn : signOut}
+          onMouseEnter={handleShowSignIn}
+          onMouseLeave={handleShowSignIn}
+          className='link'
+        >
+          <p>{session ? `Hello, ${session.user.name}` : 'Sign In'}</p>
           <p className='text-white font-bold'>Account &amp; Lists</p>
         </div>
+
+        {showSignIn && (
+          <div
+            onMouseEnter={handleShowSignIn}
+            onMouseLeave={handleShowSignIn}
+            className='hidden lg:block bg-zinc-200 text-techiebay_blue absolute right-44 top-14 rounded-sm z-20'
+          >
+            <div className='relative left-14 -top-2 border-zinc-200 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent'></div>
+            <div className=''>
+              <button onClick={!session ? signIn : signOut} className='btn m-5 px-8'>
+                {!session ? 'Sign In' : 'Sign Out'}
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Previous Orders */}
         <div className='link hidden md:inline-block'>

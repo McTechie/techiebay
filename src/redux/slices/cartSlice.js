@@ -8,6 +8,9 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    fetchCartFromStorage: (state, action) => {
+      state.items = action.payload;
+    },
     addToCart: (state, action) => {
       const index = state.items.findIndex(item => item.id === action.payload.id);
       
@@ -18,6 +21,8 @@ export const cartSlice = createSlice({
       } else {
         newCart.push(action.payload);
       }
+
+      localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
 
       state.items = newCart;
     },
@@ -34,6 +39,8 @@ export const cartSlice = createSlice({
         }
       }
 
+      localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
+
       state.items = newCart;
     },
     removeAllFromCart: (state, action) => {
@@ -45,14 +52,29 @@ export const cartSlice = createSlice({
         newCart.splice(index, 1);
       }
 
+      localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
+
       state.items = newCart;
     }
   },
 });
 
-export const { addToCart, removeFromCart, removeAllFromCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  removeAllFromCart,
+  fetchCartFromStorage
+} = cartSlice.actions;
 
 export const selectItems = (state) => state.cart.items;
-export const selectTotal = (state) => state.cart.items.reduce((total, item) => total + item.price, 0);
+export const selectTotal = (state) => {
+  let total = 0;
+
+  state.cart.items.forEach(item => {
+    total += item.price * item.count;
+  });
+
+  return total;
+};
 
 export default cartSlice.reducer;

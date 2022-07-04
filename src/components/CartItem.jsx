@@ -52,7 +52,7 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
         </p>
 
         <div className='mb-5'>
-          &#8377;{price}
+          &#8377;{price} <span className='text-red-400 ml-1 text-sm line-through'>{Math.round(price * 1.5)}</span>
         </div>
 
         {hasPrimeDelivery && (

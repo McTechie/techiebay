@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { useSelector } from 'react-redux'
-import { selectItems } from '../redux/slices/cartSlice'
-import { Header, Footer, CartItems, CheckoutSidebar } from '../components'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectItems, fetchCartFromStorage } from '../redux/slices/cartSlice'
+import { Header, Footer, CartItems, Sidebar } from '../components'
+
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const items = useSelector(selectItems);
   
   const [totalItems, setTotalItems] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
-
+  
   const handleSearchOverlay = () => {
     setIsSearching(isSearching => !isSearching);
   };
+
+  useEffect(() => {
+    const storageItems = localStorage.getItem('techiebay cart') || [];
+    dispatch(fetchCartFromStorage(JSON.parse(storageItems)));
+  }, []);
 
   useEffect(() => {
     let total = 0;
@@ -27,7 +34,7 @@ const Checkout = () => {
   useEffect(() => {
     window.addEventListener('scroll', () => setIsSearching(false));
     return () => window.removeEventListener('scroll', () => {});
-  });
+  }, [isSearching]);
 
   return (
     <div className='bg-gray-100'>
@@ -45,7 +52,7 @@ const Checkout = () => {
         
         <CartItems items={items} />
 
-        <CheckoutSidebar totalItems={totalItems} />
+        <Sidebar items={items} totalItems={totalItems} />
 
       </main>
 
