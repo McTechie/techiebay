@@ -7,8 +7,6 @@ import moment from 'moment'
 const Orders = ({ orders }) => {
   const { data: session } = useSession();
 
-  console.log(orders);
-
   return (
     <div>
       <Header />

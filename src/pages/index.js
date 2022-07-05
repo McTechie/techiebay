@@ -14,10 +14,10 @@ export default function Home({ products }) {
     setIsSearching(isSearching => !isSearching);
   }
 
-  useEffect(() => {
-    const storageItems = JSON.parse(localStorage.getItem('techiebay cart')) || [];
-    dispatch(fetchCartFromStorage(storageItems));
-  }, []);
+  // useEffect(() => {
+  //   const storageItems = JSON.parse(localStorage.getItem('techiebay cart')) || [];
+  //   dispatch(fetchCartFromStorage(storageItems));
+  // }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', () => setIsSearching(false));

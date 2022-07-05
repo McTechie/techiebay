@@ -22,7 +22,7 @@ export const cartSlice = createSlice({
         newCart.push(action.payload);
       }
 
-      localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
+      // localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
 
       state.items = newCart;
     },
@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
         }
       }
 
-      localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
+      // localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
 
       state.items = newCart;
     },
@@ -52,7 +52,7 @@ export const cartSlice = createSlice({
         newCart.splice(index, 1);
       }
 
-      localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
+      // localStorage.setItem('techiebay cart', JSON.stringify([...newCart]));
 
       state.items = newCart;
     }

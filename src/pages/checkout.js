@@ -16,10 +16,10 @@ const Checkout = () => {
     setIsSearching(isSearching => !isSearching);
   };
 
-  useEffect(() => {
-    const storageItems = localStorage.getItem('techiebay cart') || [];
-    dispatch(fetchCartFromStorage(JSON.parse(storageItems)));
-  }, []);
+  // useEffect(() => {
+  //   const storageItems = localStorage.getItem('techiebay cart') || [];
+  //   dispatch(fetchCartFromStorage(JSON.parse(storageItems)));
+  // }, []);
 
   useEffect(() => {
     let total = 0;
