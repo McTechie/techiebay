@@ -154,7 +154,7 @@ const TopHeader = ({ handleSearchOverlay }) => {
         )}
 
         {/* Previous Orders */}
-        <div className='link hidden md:inline-block'>
+        <div className='link hidden md:inline-block' onClick={() => router.push('/orders')}>
           <p>Returns</p>
           <p className='text-white font-bold'>&amp; Orders</p>
         </div>

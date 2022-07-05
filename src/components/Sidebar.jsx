@@ -1,19 +1,38 @@
 import { BadgeCheckIcon } from '@heroicons/react/solid'
+import { loadStripe } from '@stripe/stripe-js'
 import { signIn, useSession } from 'next-auth/react'
 import { useSelector } from 'react-redux'
 import { selectTotal } from '../redux/slices/cartSlice'
+import axios from 'axios'
 import SidebarItem from './SidebarItem'
+
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 const CheckoutSidebar = ({ items, totalItems }) => {
   const { data: session } = useSession();
   const total = useSelector(selectTotal);
 
-  const handleCheckout = () => {
-    if (!session) {
-      signIn();
+  const createCheckoutSession = async () => {
+    const stripe = await stripePromise;
+
+    const checkoutSession = await axios.post('/api/create-checkout-session', {
+      items,
+      email: session.user.email
+    });
+    
+    const res = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id
+    });
+
+    if (res.error) {
+      alert(res.error.message)
     } else {
-      console.log('Checking Out');
+      localStorage.setItem('techiebay cart', JSON.stringify([]));
     }
+  }
+
+  const handleCheckout = () => {
+    !session ? signIn() : createCheckoutSession();
   }
 
   return (
@@ -49,6 +68,7 @@ const CheckoutSidebar = ({ items, totalItems }) => {
           ))}
 
           <button
+            role='link'
             onClick={handleCheckout}
             className={`btn mt-4 ${!session && 'from-gray-300 to-gray-500 border-gray-200 text-gray-200'}`}
           >

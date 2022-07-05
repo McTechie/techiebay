@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Banner, Footer, Header, ProductFeed } from '../components'
 import { useDispatch } from 'react-redux'
 import { fetchCartFromStorage } from '../redux/slices/cartSlice'
+import { getSession } from 'next-auth/react'
 
 export default function Home({ products }) {
   const [isSearching, setIsSearching] = useState(false);
@@ -14,8 +15,8 @@ export default function Home({ products }) {
   }
 
   useEffect(() => {
-    const storageItems = localStorage.getItem('techiebay cart') || [];
-    dispatch(fetchCartFromStorage(JSON.parse(storageItems)));
+    const storageItems = JSON.parse(localStorage.getItem('techiebay cart')) || [];
+    dispatch(fetchCartFromStorage(storageItems));
   }, []);
 
   useEffect(() => {
@@ -45,13 +46,15 @@ export default function Home({ products }) {
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
   const res = await fetch('https://fakestoreapi.com/products');
   const products = await res.json();
 
   return {
     props: {
-      products
+      products,
+      session
     }
   }
 }

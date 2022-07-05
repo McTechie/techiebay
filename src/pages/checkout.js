@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { getSession } from 'next-auth/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectItems, fetchCartFromStorage } from '../redux/slices/cartSlice'
 import { Header, Footer, CartItems, Sidebar } from '../components'
-
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -62,3 +62,13 @@ const Checkout = () => {
 }
  
 export default Checkout;
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session
+    }
+  }
+}

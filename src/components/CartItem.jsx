@@ -58,7 +58,7 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
         {hasPrimeDelivery && (
           <div className='flex items-center space-x-2 -mt-5'>
             <Image src='/prime.png' alt='Techiebay Prime Delivery' width={50} height={50} />
-            <p className='text-xs text-gray-500'>FREE Next-Day Delivery</p>
+            <p className='text-xs text-gray-500'>Next-Day Delivery</p>
           </div>
         )}
 

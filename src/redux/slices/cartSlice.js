@@ -67,14 +67,6 @@ export const {
 } = cartSlice.actions;
 
 export const selectItems = (state) => state.cart.items;
-export const selectTotal = (state) => {
-  let total = 0;
-
-  state.cart.items.forEach(item => {
-    total += item.price * item.count;
-  });
-
-  return total;
-};
+export const selectTotal = (state) => state.cart.items.reduce((total, item) => total + (item.price * item.count), 0);
 
 export default cartSlice.reducer;
