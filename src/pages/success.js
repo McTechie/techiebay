@@ -33,7 +33,7 @@ const Success = () => {
 export default Success;
 
 export const getServerSideProps = async (context) => {
-  const session = getSession(context);
+  const session = await getSession(context);
 
   return {
     props: {

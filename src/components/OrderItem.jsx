@@ -13,7 +13,7 @@ const OrderItem = ({ id, amount, amountShipping, items, timestamp, images }) => 
         <div>
           <p className='text-xs font-bold'>TOTAL</p>
           <p>
-            &#8377;{amount} - Next Day Delivery &#8377;{amount}
+            &#8377;{amount} - Next Day Delivery &#8377;{amountShipping}
           </p>
         </div>
 
@@ -28,8 +28,8 @@ const OrderItem = ({ id, amount, amountShipping, items, timestamp, images }) => 
 
       <div className='p-5 sm:p-10'>
         <div className='flex space-x-6 overflow-x-auto'>
-          {images.map(image => (
-            <Image src={image} alt='' width={150} height={150} objectFit='contain' />
+          {images.map((image, idx) => (
+            <Image key={idx} src={image} alt='' width={150} height={150} objectFit='contain' />
           ))}
         </div>
       </div>
