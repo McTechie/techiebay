@@ -18,30 +18,26 @@ export default async (req, res) => {
 
   // Does not work since only one shipping rate is allowed
 
-  // const primeShippingRate = 'shr_1LI9XKSBBKaXGd14lJLCZD6p';
-  // const freeShippingRate = 'shr_1LI9XKSBBKaXGd14lJLCZD6p';
-  // const normalShippingRate = 'shr_1LI9XKSBBKaXGd14lJLCZD6p';
+  const normalShippingRate = 'shr_1LITnqSBBKaXGd14nyEyqBUJ';
+  const primeShippingRate = 'shr_1LI9XKSBBKaXGd14lJLCZD6p';
 
-  // const checkoutSubtotal = items.reduce((total, item) => total + (item.price * item.count), 0);
-  // const freeDeliveryEligible = checkoutSubtotal > 1000 ? freeShippingRate : normalShippingRate;
+  const itemsHavePrimeDelivery = items.map(item => item.hasPrimeDelivery);
+  const primeDeliveryEligible = itemsHavePrimeDelivery.every(Boolean);
 
-  // const itemsHavePrimeDelivery = items.map(item => item.hasPrimeDelivery);
-  // const primeDeliveryEligible = itemsHavePrimeDelivery.every(Boolean);
+  let shippingRates = [];
 
-  // let shippingRates = [];
-
-  // if (primeDeliveryEligible) {
-  //   shippingRates = [freeDeliveryEligible, primeShippingRate];
-  // } else {
-  //   shippingRates = [freeDeliveryEligible];
-  // }
+  if (primeDeliveryEligible) {
+    shippingRates = [primeShippingRate];
+  } else {
+    shippingRates = [normalShippingRate];
+  }
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     shipping_address_collection: {
       allowed_countries: ['GB', 'US', 'CA', 'IN']
     },
-    shipping_rates: ['shr_1LI9F9SBBKaXGd141pjTLCS9'],
+    shipping_rates: shippingRates,
     line_items: transformedItems,
     mode: 'payment',
     success_url: `${process.env.HOST}/success`,

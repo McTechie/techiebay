@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { BadgeCheckIcon, StarIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, selectItems } from '../redux/slices/cartSlice'
+import { motion } from 'framer-motion'
 
 const Product = ({ id, title, price, description, category, image, rating }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,12 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
   }
 
   return (
-    <div className='relative flex flex-col m-5 bg-white z-30 p-10 hover:-translate-y-2 hover:duration-300'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
+      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+      className='relative flex flex-col m-5 bg-white z-30 p-10'
+    >
       <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
       <Image
@@ -76,7 +82,7 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
           'Add to Cart'
         )}
       </button>
-    </div>
+    </motion.div>
   );
 }
  

@@ -2,7 +2,7 @@ import { BadgeCheckIcon } from '@heroicons/react/solid'
 import { loadStripe } from '@stripe/stripe-js'
 import { signIn, useSession } from 'next-auth/react'
 import { useSelector } from 'react-redux'
-import { selectTotal } from '../redux/slices/cartSlice'
+import { selectTotal, selectPrime } from '../redux/slices/cartSlice'
 import axios from 'axios'
 import SidebarItem from './SidebarItem'
 
@@ -11,6 +11,7 @@ const stripePromise = loadStripe(process.env.stripe_public_key);
 const CheckoutSidebar = ({ items, totalItems }) => {
   const { data: session } = useSession();
   const total = useSelector(selectTotal);
+  const prime = useSelector(selectPrime);
 
   const createCheckoutSession = async () => {
     const stripe = await stripePromise;
@@ -44,14 +45,14 @@ const CheckoutSidebar = ({ items, totalItems }) => {
             <span className='ml-2 font-bold'>&#8377;{total}</span>
           </h2>
 
-          {total > 1000 ? (
+          {prime ? (
             <p className='animate-bounce text-sm rounded-md flex items-center text-green-700 bg-green-200 p-1 mt-2 mb-3'>
               <BadgeCheckIcon className='h-5 mr-3' />
               Your order is eligible for Free Delivery!
             </p>
           ) : (
             <p className='text-sm rounded-md text-center text-gray-700 bg-gray-200 p-1 mt-2 mb-3'>
-              Place an order above 1000 for Free Delivery!
+              Place an order with only Prime Delivery items for Free Delivery!
             </p>
           )}
 

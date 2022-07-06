@@ -1,23 +1,14 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Banner, Footer, Header, ProductFeed } from '../components'
-import { useDispatch } from 'react-redux'
-import { fetchCartFromStorage } from '../redux/slices/cartSlice'
 import { getSession } from 'next-auth/react'
 
 export default function Home({ products }) {
   const [isSearching, setIsSearching] = useState(false);
 
-  const dispatch = useDispatch();
-
   const handleSearchOverlay = () => {
     setIsSearching(isSearching => !isSearching);
   }
-
-  // useEffect(() => {
-  //   const storageItems = JSON.parse(localStorage.getItem('techiebay cart')) || [];
-  //   dispatch(fetchCartFromStorage(storageItems));
-  // }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', () => setIsSearching(false));

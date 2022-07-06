@@ -1,9 +1,15 @@
 import Image from 'next/image'
 import { StarIcon } from '@heroicons/react/solid'
+import { motion } from 'framer-motion'
 
 const SidebarItem = ({ title, price, image, stars, hasPrimeDelivery, count }) => {
   return (
-    <div className='hidden lg:grid grid-cols-3 shadow-md p-4 m-2 max-w-sm xl:max-w-md'>
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className='hidden lg:grid grid-cols-3 shadow-md p-4 m-2 max-w-sm xl:max-w-md'
+    >
       <Image
         src={image}
         alt={title}
@@ -35,7 +41,7 @@ const SidebarItem = ({ title, price, image, stars, hasPrimeDelivery, count }) =>
           &#8377;{price} <span className='text-red-400 ml-1 text-sm line-through'>{Math.round(price * 1.5)}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
  

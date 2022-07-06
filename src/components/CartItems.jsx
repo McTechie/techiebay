@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import CartItem from './CartItem'
+import { motion } from 'framer-motion'
 
 const CartItems = ({ items }) => {
   const router = useRouter();
@@ -22,21 +23,29 @@ const CartItems = ({ items }) => {
 
         {!items.length && (
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-10'>
-            <div className='lg:col-span-3 justify-self-center'>
+            <motion.div
+              animate={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+              className='lg:col-span-3 justify-self-center'
+            >
               <Image  src='/emptyCart.svg' width={500} height={300} />
-            </div>
-            <div className='shadow-md p-10 lg:col-span-2 space-y-5 max-h-64 lg:mr-10'>
+            </motion.div>
+            <motion.div
+              animate={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+              className='shadow-md p-10 lg:col-span-2 space-y-5 max-h-64 lg:mr-10'
+            >
               <h4 className='text-xl font-bold'>Your Cart feels lonely.</h4>
               <p className='font-light'>Your shopping cart lives to serve. Give it purpose - fill it with books, electronicts, videos, etc. and make it happy.</p>
               <button className='btn mt-2 hover:scale-105 duration-300' onClick={() => router.push('/')}>
                 Continue Shopping
               </button>
-            </div>
+            </motion.div>
           </div>
         )}
 
         {items && items.map(({ id, title, price, description, category, image, stars, hasPrimeDelivery, count }, idx) => (
-          <CartItem
+          <CartItem 
             key={idx}
             id={id}
             title={title}

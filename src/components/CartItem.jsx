@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { StarIcon, TrashIcon } from '@heroicons/react/solid'
 import { useDispatch } from 'react-redux'
 import { addToCart, removeFromCart, removeAllFromCart } from '../redux/slices/cartSlice'
+import { motion } from 'framer-motion'
 
 const CartItem = ({ id, title, price, description, category, image, stars, hasPrimeDelivery, count }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,12 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
   }
   
   return (
-    <div className='grid grid-cols-5 shadow-md rounded-lg p-5'>
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className='grid grid-cols-5 shadow-md rounded-lg p-5'
+    >
       <Image
         src={image}
         alt={title}
@@ -71,7 +77,7 @@ const CartItem = ({ id, title, price, description, category, image, stars, hasPr
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
  

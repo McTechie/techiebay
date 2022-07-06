@@ -1,9 +1,16 @@
 import moment from 'moment'
-import Image from 'next/image';
+import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const OrderItem = ({ id, amount, amountShipping, items, timestamp, images }) => {
   return (
-    <div className='relative border rounded-md'>
+    <motion.div 
+      initial={{ y: 20, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once:true }}
+      className='relative border rounded-md'
+    >
       <div className='flex items-center p-5 space-x-10 bg-gray-100 text-sm text-gray-600'>
         <div>
           <p className='text-xs font-bold'>ORDER PLACED</p>
@@ -33,7 +40,7 @@ const OrderItem = ({ id, amount, amountShipping, items, timestamp, images }) => 
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
  

@@ -68,5 +68,10 @@ export const {
 
 export const selectItems = (state) => state.cart.items;
 export const selectTotal = (state) => state.cart.items.reduce((total, item) => total + (item.price * item.count), 0);
+export const selectPrime = (state) => {
+  const itemsHavePrimeDelivery = state.cart.items.map(item => item.hasPrimeDelivery);
+  const primeDeliveryEligible = itemsHavePrimeDelivery.every(Boolean);
+  return primeDeliveryEligible;
+}
 
 export default cartSlice.reducer;
