@@ -1,12 +1,17 @@
-import { buffer } from 'micro'
-import * as admin from 'firebase-admin'
+const { buffer } = require('micro');
+const { initializeApp, cert, getApp, getApps } = require('firebase-admin/app');
+const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 
 // Connect to Firebase via Backend
-const serviceAccount = require(process.env.FB_SERVICE_ACCOUNT_JSON);
+const app = !getApps().length ? initializeApp({
+  credential: cert({
+    projectId: process.env.FB_PERM_PROJECT_ID,
+    clientEmail: process.env.FB_PERM_CLIENT_EMAIL,
+    privateKey: process.env.FB_PERM_PRIVATE_KEY.replace(/\\n/g, '\n')
+  })
+}) : getApp();
 
-const app = !admin.apps.length ? admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-}) : admin.app();
+const db = getFirestore();
 
 // Connect to Stripe
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -14,14 +19,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
-  return app
-    .firestore()
+  return db
     .collection('users').doc(session.metadata.email)
     .collection('orders').doc(session.id).set({
       amount: session.amount_total / 100,
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
-      timestamp: admin.firestore.FieldValue.serverTimestamp()
+      timestamp: FieldValue.serverTimestamp()
     })
     .then(() => {
       console.log(`SUCCESS: Order ${session.id} has been added to the DB`)
@@ -49,7 +53,7 @@ export default async (req, res) => {
 
       return fulfillOrder(session)
         .then(() => res.status(200))
-        .catch(err => res.status(400).send(`Webhook Error: ${err.message}`))
+        .catch(err => res.status(400).send(`WEBHOOK ERROR: ${err.message}`))
     }
   }
 }

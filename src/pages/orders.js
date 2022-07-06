@@ -1,6 +1,6 @@
 import { Footer, Header, OrderItem } from '../components'
 import { getSession, useSession } from 'next-auth/react'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import db from '../../firebase'
 import moment from 'moment'
 
@@ -55,8 +55,9 @@ export const getServerSideProps = async (context) => {
     }
   }
 
-  const subColRef = collection(db, 'users', session.user.email, 'orders');
-  const ordersInFirebase = await getDocs(subColRef);
+  const ordersRef = collection(db, 'users', session.user.email, 'orders');
+  const ordersQuery = query(ordersRef, orderBy('timestamp', 'desc'));
+  const ordersInFirebase = await getDocs(ordersQuery);
   
   const orders = await Promise.all(
     ordersInFirebase.docs.map(async (order) => ({

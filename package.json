@@ -28,6 +28,7 @@
     "stripe": "^9.11.0"
   },
   "devDependencies": {
+    "@types/micro": "^7.3.7",
     "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.0",
