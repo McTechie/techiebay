@@ -1,6 +1,6 @@
 import Product from './Product'
 
-const ProductMap = ({ products }) => (
+const ProductMap = ({ products, setShowProductPreview, setProductPreviewData }) => (
   products.map(({ id, title, price, description, category, image, rating }) => (
     <Product
       key={id}
@@ -11,14 +11,20 @@ const ProductMap = ({ products }) => (
       category={category}
       image={image}
       rating={rating.rate}
+      setShowProductPreview={setShowProductPreview}
+      setProductPreviewData={setProductPreviewData}
     />
   ))
 )
 
-const ProductFeed = ({ products }) => {
+const ProductFeed = ({ products, setShowProductPreview, setProductPreviewData }) => {
   return (
     <div className='grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto'>
-      {<ProductMap products={products?.slice(0, 4)} />}
+      {<ProductMap
+        setShowProductPreview={setShowProductPreview}
+        setProductPreviewData={setProductPreviewData}
+        products={products?.slice(0, 4)}
+      />}
 
       <picture className='md:col-span-full'>
         <source srcSet='/row_banner.webp' type='image/webp' />
@@ -26,10 +32,18 @@ const ProductFeed = ({ products }) => {
       </picture>
 
       <div className='md:col-span-2'>
-        {<ProductMap products={products?.slice(4, 5)} />}
+        {<ProductMap
+          setShowProductPreview={setShowProductPreview}
+          setProductPreviewData={setProductPreviewData}
+          products={products?.slice(4, 5)}
+        />}
       </div>
 
-      {<ProductMap products={products?.slice(5, products.length)} />}
+      {<ProductMap
+        setShowProductPreview={setShowProductPreview}
+        setProductPreviewData={setProductPreviewData}
+        products={products?.slice(5, products.length)}
+      />}
     </div>
   );
 }

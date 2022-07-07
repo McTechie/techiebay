@@ -16,8 +16,6 @@ export default async (req, res) => {
     }
   }));
 
-  // Does not work since only one shipping rate is allowed
-
   const normalShippingRate = 'shr_1LITnqSBBKaXGd14nyEyqBUJ';
   const primeShippingRate = 'shr_1LI9XKSBBKaXGd14lJLCZD6p';
 

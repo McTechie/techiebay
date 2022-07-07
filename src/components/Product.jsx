@@ -5,18 +5,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, selectItems } from '../redux/slices/cartSlice'
 import { motion } from 'framer-motion'
 
-const Product = ({ id, title, price, description, category, image, rating }) => {
+const Product = ({ id, title, price, description, category, image, rating, setShowProductPreview, setProductPreviewData }) => {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
 
   const [stars, setStars] = useState(0);
   const [hasPrimeDelivery, setHasPrimeDelivery] = useState(false);
 
-  // Prevents react-hydration-error -> initially rendered DOM is different from pre-rendered DOM
-  useEffect(() => {
-    setStars(Math.floor(rating));
-    setHasPrimeDelivery(Math.random() < 0.5);
-  }, []);
+  const fetchProductInfo = async (id) => {
+    const res = await fetch('https://fakestoreapi.com/products/' + id);
+    const products = await res.json();
+
+    setShowProductPreview(true);
+    setProductPreviewData({...products, stars, hasPrimeDelivery});
+  }
 
   const handleAddItemToCart = () => {
     const count = 1;
@@ -25,12 +27,19 @@ const Product = ({ id, title, price, description, category, image, rating }) => 
     dispatch(addToCart(item));
   }
 
+  // Prevents react-hydration-error -> initially rendered DOM is different from pre-rendered DOM
+  useEffect(() => {
+    setStars(Math.floor(rating));
+    setHasPrimeDelivery(Math.random() < 0.5);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1, transition: { duration: 0.5 } }}
       whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-      className='relative flex flex-col m-5 bg-white z-30 p-10'
+      className='relative flex flex-col m-5 bg-white z-30 p-10 hover:cursor-pointer rounded-lg'
+      onClick={() => fetchProductInfo(id)}
     >
       <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 

@@ -5,6 +5,7 @@ import Footer from './Footer'
 import Header from './Header'
 import OrderItem from './OrderItem'
 import ProductFeed from './ProductFeed'
+import ProductPreview from './ProductPreview'
 import Sidebar from './Sidebar'
 
-export { Banner, CartItem, CartItems, Footer, Header, OrderItem, Sidebar, ProductFeed };
+export { Banner, CartItem, CartItems, Footer, Header, OrderItem, ProductFeed, ProductPreview, Sidebar };
