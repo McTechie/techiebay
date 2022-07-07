@@ -6,7 +6,6 @@ import { getSession } from 'next-auth/react'
 export default function Home({ products }) {
   const [isSearching, setIsSearching] = useState(false);
   const [showProductPreview, setShowProductPreview] = useState(false);
-  const [productPreviewData, setProductPreviewData] = useState({});
 
   const handleSearchOverlay = () => {
     setIsSearching(isSearching => !isSearching);
@@ -33,16 +32,12 @@ export default function Home({ products }) {
         <Banner />
 
         <div>
-          {showProductPreview && <ProductPreview
-            productPreviewData={productPreviewData}
-            setShowProductPreview={setShowProductPreview}
-          />}
+          {showProductPreview && <ProductPreview setShowProductPreview={setShowProductPreview} />}
         </div>
 
         <ProductFeed
           products={products}
           setShowProductPreview={setShowProductPreview}
-          setProductPreviewData={setProductPreviewData}
         />
       </main>
 

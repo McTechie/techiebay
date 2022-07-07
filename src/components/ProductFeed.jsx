@@ -1,6 +1,6 @@
 import Product from './Product'
 
-const ProductMap = ({ products, setShowProductPreview, setProductPreviewData }) => (
+const ProductMap = ({ products, setShowProductPreview }) => (
   products.map(({ id, title, price, description, category, image, rating }) => (
     <Product
       key={id}
@@ -12,17 +12,15 @@ const ProductMap = ({ products, setShowProductPreview, setProductPreviewData }) 
       image={image}
       rating={rating.rate}
       setShowProductPreview={setShowProductPreview}
-      setProductPreviewData={setProductPreviewData}
     />
   ))
 )
 
-const ProductFeed = ({ products, setShowProductPreview, setProductPreviewData }) => {
+const ProductFeed = ({ products, setShowProductPreview }) => {
   return (
     <div className='grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto'>
       {<ProductMap
         setShowProductPreview={setShowProductPreview}
-        setProductPreviewData={setProductPreviewData}
         products={products?.slice(0, 4)}
       />}
 
@@ -34,14 +32,12 @@ const ProductFeed = ({ products, setShowProductPreview, setProductPreviewData })
       <div className='md:col-span-2'>
         {<ProductMap
           setShowProductPreview={setShowProductPreview}
-          setProductPreviewData={setProductPreviewData}
           products={products?.slice(4, 5)}
         />}
       </div>
 
       {<ProductMap
         setShowProductPreview={setShowProductPreview}
-        setProductPreviewData={setProductPreviewData}
         products={products?.slice(5, products.length)}
       />}
     </div>
