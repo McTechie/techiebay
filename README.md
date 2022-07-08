@@ -1,34 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  Techiebay
+</h1>
+<p align="center">
+  <a href="https://nextjs.org/">
+    <img alt="NextJS" src="https://camo.githubusercontent.com/92ec9eb7eeab7db4f5919e3205918918c42e6772562afb4112a2909c1aaaa875/68747470733a2f2f6173736574732e76657263656c2e636f6d2f696d6167652f75706c6f61642f76313630373535343338352f7265706f7369746f726965732f6e6578742d6a732f6e6578742d6c6f676f2e706e67" width="40" />
+  </a>
+  <a href="https://tailwindcss.com/">
+    <img alt="Tailwind CSS" src="https://avatars.githubusercontent.com/u/67109815?s=200&v=4" width="45" />
+  </a>
+  <a href="https://redux-toolkit.js.org/">
+    <img alt="Redux" src="https://redux-toolkit.js.org/img/redux.svg" width="45" />
+  </a>
+  <a href="https://stripe.com/">
+    <img alt="Stripe" src="https://avatars.githubusercontent.com/u/856813?s=200&v=4" width="40" />
+  </a>
+  <a href="https://firebase.google.com/">
+    <img alt="Firebase" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" width="40" />
+  </a>
+  <a href="http://fakestoreapi.com">
+    <img alt="Fake Store API" src="./public/fakestore.png" width="45" />
+  </a>
+</p>
 
-## Getting Started
+> An Amazon clone created by **McTechie** 👨‍🎨✨
 
-First, run the development server:
+### Concepts Covered
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- [x] Server-Side Rendering (NextJS)
+- [x] Client-Side Rendering (SWR)
+- [x] Redux Toolkit
+- [x] Google OAuth Authentication (NextAuth) 
+- [x] Stripe Checkouts
+  - [x] Stripe Client
+  - [x] Stripe CLI
+  - [x] Stripe Webhooks
+- [x] Firebase V9
+  - [x] Service Accounts (Node.js)
+  - [x] Client Apps (Web)
+  - [x] Subcollections
+- [x] APIs
+- [x] Animations (Framer Motion)
+- [x] Code-Splitting
+- [x] Image Optimization
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Overview
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+> To view more images of the build:
+> - [Landing Screen](readme-utils/LandingScreen.md)
+> - [Checkout Screen](readme-utils/CheckoutScreen.md)
+> - [Product Preview Screen](readme-utils/PreviewScreen.md)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### Landing Page
+  
+  ![Landing Page](assets/landing-xl.png)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+#### Product Preview
+  
+  ![Product Preview](assets/product-preview-2.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Checkout Page
+  
+  ![Checkout Page](assets/cart-filled-prime.png)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Stripe Checkout Session
+  
+  ![Stripe Checkout Session](assets/stripe-checkout.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+#### Orders Page
+
+  ![Orders Page](assets/orders.png)
+
+---
