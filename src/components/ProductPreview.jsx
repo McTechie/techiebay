@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
+import { MiniImageOne, MiniImageThree, MiniImageTwo } from './MiniImages'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BadgeCheckIcon, StarIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
@@ -50,44 +51,6 @@ const ProductImageLarge = ({ image, hueRotation }) => (
 const ProductImageOne = ({ image }) => <ProductImageLarge image={image} hueRotation={0} />
 const ProductImageTwo = ({ image }) => <ProductImageLarge image={image} hueRotation={180} />
 const ProductImageThree = ({ image }) => <ProductImageLarge image={image} hueRotation={90} />
-
-const MiniImageItem = ({ product, productImageChoice, setProductImageChoice, itemKey, hueRotation }) => (
-  <li
-    key={itemKey}
-    onClick={() => setProductImageChoice(itemKey)}
-    className={`p-2 hover:cursor-pointer hover:scale-105 hover:shadow-md rounded-md border hue-rotate-${hueRotation}`}>
-    <Image src={product.image} width={80} height={80} objectFit='contain' />
-    {productImageChoice === itemKey ? (
-      <motion.div className="underline" layoutId="underline" />
-    ) : null}
-  </li>
-)
-
-const MiniImageMap = ({ product, productImageChoice, setProductImageChoice }) => (
-  <>
-    <MiniImageItem
-      product={product}
-      productImageChoice={productImageChoice}
-      setProductImageChoice={setProductImageChoice}
-      itemKey={1}
-      hueRotation={0}
-    />
-    <MiniImageItem
-      product={product}
-      productImageChoice={productImageChoice}
-      setProductImageChoice={setProductImageChoice}
-      itemKey={2}
-      hueRotation={180}
-    />
-    <MiniImageItem
-      product={product}
-      productImageChoice={productImageChoice}
-      setProductImageChoice={setProductImageChoice}
-      itemKey={3}
-      hueRotation={90}
-    />
-  </>
-)
 
 const ProductPreview = ({ setShowProductPreview }) => {
   const dispatch = useDispatch();
@@ -159,11 +122,9 @@ const ProductPreview = ({ setShowProductPreview }) => {
                 </motion.div>
               </AnimatePresence>
               <ul className='hidden md:flex lg:flex-col justify-between mt-5 lg:ml-5 lg:mt-0'>
-                <MiniImageMap
-                  product={product}
-                  productImageChoice={productImageChoice}
-                  setProductImageChoice={setProductImageChoice}
-                />
+                <MiniImageOne product={product} productImageChoice={productImageChoice} setProductImageChoice={setProductImageChoice} itemKey={1} />
+                <MiniImageTwo product={product} productImageChoice={productImageChoice} setProductImageChoice={setProductImageChoice} itemKey={2} />
+                <MiniImageThree product={product} productImageChoice={productImageChoice} setProductImageChoice={setProductImageChoice} itemKey={3} />
               </ul>
             </div>
 
