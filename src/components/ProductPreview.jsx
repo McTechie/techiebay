@@ -174,11 +174,11 @@ const ProductPreview = ({ setShowProductPreview }) => {
               </h5>
 
               <button
-                disabled={items.findIndex(item => item.id === id) >= 0}
+                disabled={items.findIndex(item => item.id === productId) >= 0}
                 onClick={handleAddItemToCart}
                 className='mt-auto btn disabled:from-orange-500 disabled:to-orange-400'
               >
-                {items.findIndex(item => item.id === id) >= 0 ? (
+                {items.findIndex(item => item.id === productId) >= 0 ? (
                     <div className='flex items-center justify-center'>
                       <BadgeCheckIcon className='h-5 mr-2' />
                       Added to Cart

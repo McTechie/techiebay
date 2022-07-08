@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { BadgeCheckIcon, StarIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
@@ -49,7 +49,7 @@ const Product = ({ id, title, price, description, category, image, rating, setSh
         objectFit='contain'
         placeholder='empty'
       />
-      
+
       <h4 className='my-3'>{title}</h4>
 
       <div className='flex'>
@@ -59,7 +59,7 @@ const Product = ({ id, title, price, description, category, image, rating, setSh
             <StarIcon key={i} className='h-5 text-orange-500' />
           ))}
       </div>
-      
+
       <p className='text-xs my-2'>
         { description.length > 120 ? description.substring(0, 120) + '...' : description }
       </p>
@@ -74,7 +74,6 @@ const Product = ({ id, title, price, description, category, image, rating, setSh
           <p className='text-xs text-gray-500'>Next-Day Delivery</p>
         </div>
       )}
-
       <button
         disabled={items.findIndex(item => item.id === id) >= 0}
         onClick={handleAddItemToCart}
