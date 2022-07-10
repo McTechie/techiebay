@@ -22,7 +22,7 @@
   </a>
 </p>
 
-> An Amazon clone created by **McTechie** 👨‍🎨✨
+> An e-commerce app created by **McTechie** 👨‍🎨✨
 
 ### Concepts Covered
 
